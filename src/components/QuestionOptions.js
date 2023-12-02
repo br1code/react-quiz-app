@@ -1,8 +1,12 @@
-export default function QuestionOptions({ question, answer, dispatch }) {
+import { useQuiz } from "../contexts/QuizContext";
+
+export default function QuestionOptions() {
+    const { questions, index, answer, answerQuestion } = useQuiz();
+    const question = questions[index];
     const questionWasAnswered = answer != null;
 
     function handleOnClick(optionIndex) {
-        dispatch({ type: "answer", payload: optionIndex });
+        answerQuestion(optionIndex);
     }
 
     const addSelectedAnswerClass = (i) => (i === answer ? "answer" : "");
